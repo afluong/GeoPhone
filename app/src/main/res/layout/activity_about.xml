@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/bg"
     tools:context="com.example.anneflo.geophone.AboutActivity">
 
     <ImageView
@@ -24,18 +24,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="68dp"
         android:id="@+id/imageView3" />
-
-    <TextView
-        android:text="GeoPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="#E0F2F1"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/imageView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp" />
 
     <TextView
         android:text="GeoPhone is a phone tracking app developed for an Android course at ECE Paris"
@@ -116,5 +104,17 @@
         android:layout_below="@+id/imageView5"
         android:layout_toEndOf="@+id/imageView3"
         android:layout_marginStart="11dp" />
+
+    <TextView
+        android:text="GeoPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="#E0F2F1"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp" />
 
 </RelativeLayout>
