@@ -26,48 +26,17 @@
         android:id="@+id/imageView3" />
 
     <TextView
-        android:text="GeoPhone is a phone tracking app developed for an Android course at ECE Paris"
+        android:text="GeoPhone is a GPS phone tracking app developed for an Android course at ECE Paris."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#009688"
         android:fontFamily="sans-serif-thin"
+        android:textAlignment="center"
         android:width="50mm"
         android:id="@+id/textView4"
         android:layout_marginTop="23dp"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="?attr/actionModeCloseDrawable"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView4"
-        android:id="@+id/imageView4" />
-
-    <TextView
-        android:text="Developed by"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#E0F2F1"
-        android:fontFamily="sans-serif-thin"
-        android:textSize="30dp"
-        android:id="@+id/textView2"
-        android:layout_marginTop="45dp"
-        android:layout_below="@+id/textView4"
-        android:layout_alignEnd="@+id/textView3" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/julien"
-        android:maxHeight="60dp"
-        android:maxWidth="60dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:id="@+id/imageView5"
-        android:layout_above="@+id/textView"
-        android:layout_alignEnd="@+id/textView2" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -78,32 +47,9 @@
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:layout_marginTop="28dp"
-        android:id="@+id/imageView2"
+        android:id="@+id/annefloView"
         android:layout_below="@+id/textView2"
         android:layout_alignStart="@+id/textView2" />
-
-    <TextView
-        android:text="Anne Florence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#E0F2F1"
-        android:textSize="10dp"
-        android:fontFamily="sans-serif-thin"
-        android:id="@+id/textView"
-        android:layout_below="@+id/imageView2"
-        android:layout_alignStart="@+id/imageView2" />
-
-    <TextView
-        android:text="Julien"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#E0F2F1"
-        android:textSize="10dp"
-        android:fontFamily="sans-serif-thin"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/imageView5"
-        android:layout_toEndOf="@+id/imageView3"
-        android:layout_marginStart="11dp" />
 
     <TextView
         android:text="GeoPhone"
@@ -116,5 +62,61 @@
         android:layout_alignTop="@+id/imageView3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="69dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/julien"
+        android:maxHeight="60dp"
+        android:maxWidth="60dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:id="@+id/julienView"
+        android:layout_alignTop="@+id/annefloView"
+        android:layout_alignEnd="@+id/textView2" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="?android:attr/homeAsUpIndicator"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/imageView4" />
+
+    <TextView
+        android:text="Anne Florence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#E0F2F1"
+        android:textSize="10dp"
+        android:fontFamily="sans-serif-thin"
+        android:id="@+id/annefloText"
+        android:layout_below="@+id/annefloView"
+        android:layout_alignStart="@+id/annefloView" />
+
+    <TextView
+        android:text="Julien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#E0F2F1"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="10dp"
+        android:id="@+id/julienText"
+        android:layout_below="@+id/julienView"
+        android:layout_toEndOf="@+id/imageView3"
+        android:layout_marginStart="11dp"
+        android:layout_alignBottom="@+id/annefloText" />
+
+    <TextView
+        android:text="Developed by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#E0F2F1"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="30dp"
+        android:id="@+id/textView2"
+        android:layout_marginTop="68dp"
+        android:layout_below="@+id/textView4"
+        android:layout_alignEnd="@+id/textView3" />
 
 </RelativeLayout>

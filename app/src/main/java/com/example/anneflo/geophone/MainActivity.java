@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText textPhone = (EditText) findViewById(R.id.editText);
         final Button buttonFind = (Button) findViewById(R.id.button);
-        final ProgressBar loadingClick = (ProgressBar) findViewById(R.id.progressBar);
-        loadingClick.setVisibility(View.GONE);
+        final ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.progressBar);
+        loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
 
         //Listening on About icon
@@ -59,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
                     String phoneNumber = textPhone.getText().toString();
 
-                    Toast.makeText(getApplicationContext(), "Vous avez entré ce numéro : " + phoneNumber,
+                    Toast.makeText(getApplicationContext(), "SMS envoyé avec succès !",
                             Toast.LENGTH_SHORT).show();
 
-                    //buttonFind.setVisibility(View.GONE);
-                    //loadingClick.setVisibility(View.VISIBLE);
+                    buttonFind.setVisibility(View.GONE);
+                    loadingSpinner.setVisibility(View.VISIBLE);
 
 
                 } catch (NumberFormatException e){

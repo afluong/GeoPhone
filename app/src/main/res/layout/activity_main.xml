@@ -12,26 +12,13 @@
     android:background="@drawable/bg"
     tools:context="com.example.anneflo.geophone.MainActivity">
 
-    <Button
-        android:text="FIND"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#E0F2F1"
-        android:background="@drawable/button"
-        android:id="@+id/button"
-        android:fontFamily="sans-serif"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true" />
-
-    <ProgressBar
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_marginTop="19dp"
-        android:layout_below="@+id/button"
-        android:layout_alignEnd="@+id/imageView" />
+        app:srcCompat="@android:drawable/ic_menu_info_details"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/imageView3" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -42,8 +29,8 @@
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/logo"
         android:id="@+id/imageView"
-        android:layout_marginTop="62dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/imageView3"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -60,16 +47,30 @@
         android:textCursorDrawable="@null"
         android:textColorLink="@color/colorAccent"
         android:background="@drawable/bottom_edittext"
+        android:layout_marginTop="99dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginTop="95dp" />
+        android:layout_centerHorizontal="true" />
 
-    <ImageView
+    <Button
+        android:text="FIND"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_info_details"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/imageView3" />
+        android:textColor="#E0F2F1"
+        android:background="@drawable/button"
+        android:id="@+id/button"
+        android:fontFamily="sans-serif"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/progress_bar"
+        android:id="@+id/progressBar"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
