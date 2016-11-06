@@ -19,7 +19,7 @@
         android:maxWidth="80dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/logo"
+        app:srcCompat="@drawable/logo1"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="68dp"
