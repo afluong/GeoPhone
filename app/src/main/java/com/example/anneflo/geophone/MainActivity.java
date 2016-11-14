@@ -37,8 +37,13 @@ public class MainActivity extends AppCompatActivity {
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Sending to AboutActivity
                 Intent aboutIntent = new Intent(MainActivity.this, AboutActivity.class);
                 startActivity(aboutIntent);
+
+                //Slide left to right
+                overridePendingTransition(R.anim.right_slide, R.anim.left_slide);
+
             }
         });
 
@@ -72,5 +77,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }

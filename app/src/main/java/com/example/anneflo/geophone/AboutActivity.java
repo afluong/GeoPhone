@@ -33,8 +33,12 @@ public class AboutActivity extends AppCompatActivity {
         backPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Sending to MainActivity
                 Intent mainIntent = new Intent(AboutActivity.this, MainActivity.class);
                 startActivity(mainIntent);
+
+                //Slide right to left effect
+                overridePendingTransition(R.anim.left_slide, R.anim.right_slide);
             }
         });
 

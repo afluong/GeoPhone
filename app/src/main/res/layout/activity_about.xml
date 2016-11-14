@@ -15,69 +15,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxHeight="80dp"
-        android:maxWidth="80dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/logo1"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp"
-        android:id="@+id/imageView3" />
-
-    <TextView
-        android:text="GeoPhone is a GPS phone tracking app developed for an Android course at ECE Paris."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#009688"
-        android:fontFamily="sans-serif-thin"
-        android:textAlignment="center"
-        android:width="50mm"
-        android:id="@+id/textView4"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/anneflo"
-        android:maxHeight="60dp"
-        android:maxWidth="60dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:layout_marginTop="28dp"
-        android:id="@+id/annefloView"
-        android:layout_below="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
-
-    <TextView
-        android:text="GeoPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="#E0F2F1"
-        android:id="@+id/textView3"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/julien"
-        android:maxHeight="60dp"
-        android:maxWidth="60dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:id="@+id/julienView"
-        android:layout_alignTop="@+id/annefloView"
-        android:layout_alignEnd="@+id/textView2" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:srcCompat="?android:attr/homeAsUpIndicator"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -102,10 +39,58 @@
         android:fontFamily="sans-serif-thin"
         android:textSize="10dp"
         android:id="@+id/julienText"
+        android:layout_marginEnd="13dp"
         android:layout_below="@+id/julienView"
-        android:layout_toEndOf="@+id/imageView3"
-        android:layout_marginStart="11dp"
-        android:layout_alignBottom="@+id/annefloText" />
+        android:layout_alignEnd="@+id/julienView" />
+
+    <TextView
+        android:text="GeoPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="#E0F2F1"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/imageView3"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxHeight="80dp"
+        android:maxWidth="80dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/logo1"
+        android:layout_marginTop="82dp"
+        android:id="@+id/imageView3"
+        android:layout_below="@+id/imageView4"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="GeoPhone is a GPS phone tracking app developed for an Android course at ECE Paris."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#009688"
+        android:fontFamily="sans-serif-thin"
+        android:textAlignment="center"
+        android:width="50mm"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/julien"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:id="@+id/julienView"
+        android:layout_above="@+id/annefloText"
+        android:layout_alignEnd="@+id/textView3" />
 
     <TextView
         android:text="Developed by"
@@ -113,10 +98,23 @@
         android:layout_height="wrap_content"
         android:textColor="#E0F2F1"
         android:fontFamily="sans-serif-thin"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:id="@+id/textView2"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="26dp"
         android:layout_below="@+id/textView4"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/anneflo"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="11dp"
+        android:id="@+id/annefloView"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/textView3" />
 
 </RelativeLayout>
