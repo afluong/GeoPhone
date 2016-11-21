@@ -70,20 +70,20 @@ public class MainActivity extends AppCompatActivity {
 
                     //Checking if length digits is 10
                     if(!(phoneNumber.length() == digitsLength)) {
-                        Toast.makeText(getApplicationContext(), "Format de numéro incorrect (10 digits)",
+                        Toast.makeText(getApplicationContext(), "Incorrect phone number format (10 digits)",
                                 Toast.LENGTH_SHORT).show();
                     }
                     else {
                         //Checking if phoneNumber is the same as which registered
                         if(phoneNumber.equals(registeredNumber)) {
-                            Toast.makeText(getApplicationContext(), "SMS envoyé avec succès !",
+                            Toast.makeText(getApplicationContext(), "SMS sent with success !",
                                     Toast.LENGTH_SHORT).show();
 
                             buttonFind.setVisibility(View.GONE);
                             loadingSpinner.setVisibility(View.VISIBLE);
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), "Numéro inconnu",
+                            Toast.makeText(getApplicationContext(), "Unknown number",
                                     Toast.LENGTH_SHORT).show();
                         }
 
