@@ -2,6 +2,7 @@ package com.example.anneflo.geophone;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,10 +32,19 @@ public class MainActivity extends AppCompatActivity {
         final ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.progressBar);
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
-
         final String registeredNumber = "0123456789";
         final Integer digitsLength = 10;
 
+        //TEST MAP
+        final Button map = (Button) findViewById(R.id.button2);
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(MainActivity.this, LocationActivity.class);
+                startActivity(map);
+            }
+        });
 
         //Listening on About icon
         about.setClickable(true);
@@ -86,13 +96,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Unknown number",
                                     Toast.LENGTH_SHORT).show();
                         }
-
-
-
                     }
-
-
-
 
                 } catch (NumberFormatException e){
 

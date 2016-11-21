@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GeoPhone</string>
     <string name="title_activity_maps">GeoPhone</string>
+    <string name="title_activity_location">GeoPhone</string>
 </resources>
