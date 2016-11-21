@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#221C1C"
+    android:background="#202020"
     tools:context="com.example.anneflo.geophone.WelcomeActivity">
 
     <TextView
@@ -27,8 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/logo1"
-        android:maxHeight="150dp"
-        android:maxWidth="150dp"
+        android:maxHeight="140dp"
+        android:maxWidth="140dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:id="@+id/imageView2"

@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
 
+        final String registeredNumber = "0123456789";
+        final Integer digitsLength = 10;
+
+
         //Listening on About icon
         about.setClickable(true);
         about.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(aboutIntent);
 
                 //Slide left to right
-                overridePendingTransition(R.anim.right_slide, R.anim.left_slide);
+                overridePendingTransition(R.anim.left_slide, R.anim.right_slide);
 
             }
         });
@@ -64,11 +68,30 @@ public class MainActivity extends AppCompatActivity {
 
                     String phoneNumber = textPhone.getText().toString();
 
-                    Toast.makeText(getApplicationContext(), "SMS envoyé avec succès !",
-                            Toast.LENGTH_SHORT).show();
+                    //Checking if length digits is 10
+                    if(!(phoneNumber.length() == digitsLength)) {
+                        Toast.makeText(getApplicationContext(), "Format de numéro incorrect (10 digits)",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        //Checking if phoneNumber is the same as which registered
+                        if(phoneNumber.equals(registeredNumber)) {
+                            Toast.makeText(getApplicationContext(), "SMS envoyé avec succès !",
+                                    Toast.LENGTH_SHORT).show();
 
-                    buttonFind.setVisibility(View.GONE);
-                    loadingSpinner.setVisibility(View.VISIBLE);
+                            buttonFind.setVisibility(View.GONE);
+                            loadingSpinner.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), "Numéro inconnu",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+
+
+                    }
+
+
 
 
                 } catch (NumberFormatException e){
