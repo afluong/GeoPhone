@@ -21,7 +21,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
             @Override
             public void run() {
-                Intent startMain = new Intent(WelcomeActivity.this, LocationTest.class);
+                Intent startMain = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(startMain);
             }
         }, 5000L);
