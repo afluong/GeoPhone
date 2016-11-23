@@ -2,6 +2,7 @@ package com.example.anneflo.geophone;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,10 +32,20 @@ public class MainActivity extends AppCompatActivity {
         final ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.progressBar);
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
-
         final String registeredNumber = "0123456789";
         final Integer digitsLength = 10;
 
+        //TEST MAP
+        final Button map = (Button) findViewById(R.id.button2);
+
+
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent map = new Intent(MainActivity.this, LocationActivity.class);
+                startActivity(map);
+            }
+        });
 
         //Listening on About icon
         about.setClickable(true);
@@ -70,29 +81,26 @@ public class MainActivity extends AppCompatActivity {
 
                     //Checking if length digits is 10
                     if(!(phoneNumber.length() == digitsLength)) {
-                        Toast.makeText(getApplicationContext(), "Format de numéro incorrect (10 digits)",
+                        Toast.makeText(getApplicationContext(), "Incorrect phone number format (10 digits)",
                                 Toast.LENGTH_SHORT).show();
                     }
                     else {
                         //Checking if phoneNumber is the same as which registered
                         if(phoneNumber.equals(registeredNumber)) {
-                            Toast.makeText(getApplicationContext(), "SMS envoyé avec succès !",
-                                    Toast.LENGTH_SHORT).show();
 
                             buttonFind.setVisibility(View.GONE);
                             loadingSpinner.setVisibility(View.VISIBLE);
+
+                            Toast.makeText(getApplicationContext(), "SMS sent with success !",
+                                    Toast.LENGTH_SHORT).show();
+
+                            //SMS function HERE
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), "Numéro inconnu",
+                            Toast.makeText(getApplicationContext(), "Unknown number",
                                     Toast.LENGTH_SHORT).show();
                         }
-
-
-
                     }
-
-
-
 
                 } catch (NumberFormatException e){
 
