@@ -2,7 +2,7 @@ package com.example.anneflo.geophone;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Vibrator;
+import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         //TEST MAP
         final Button map = (Button) findViewById(R.id.button2);
+
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,11 +87,14 @@ public class MainActivity extends AppCompatActivity {
                     else {
                         //Checking if phoneNumber is the same as which registered
                         if(phoneNumber.equals(registeredNumber)) {
-                            Toast.makeText(getApplicationContext(), "SMS sent with success !",
-                                    Toast.LENGTH_SHORT).show();
 
                             buttonFind.setVisibility(View.GONE);
                             loadingSpinner.setVisibility(View.VISIBLE);
+
+                            Toast.makeText(getApplicationContext(), "SMS sent with success !",
+                                    Toast.LENGTH_SHORT).show();
+
+                            //SMS function HERE
                         }
                         else {
                             Toast.makeText(getApplicationContext(), "Unknown number",
