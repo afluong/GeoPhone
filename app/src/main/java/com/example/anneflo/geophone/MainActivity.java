@@ -2,9 +2,9 @@ package com.example.anneflo.geophone;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         final ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.progressBar);
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
-        final String registeredNumber = "0123456789";
+        final String registeredNumber = "0631192880";
         final Integer digitsLength = 10;
 
         //TEST MAP
@@ -75,40 +75,38 @@ public class MainActivity extends AppCompatActivity {
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
-                try {
+                //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
 
-                    String phoneNumber = textPhone.getText().toString();
+                String phoneNumber = textPhone.getText().toString();
+                String message = "ça marche Anne !!!";
 
-                    //Checking if length digits is 10
-                    if(!(phoneNumber.length() == digitsLength)) {
-                        Toast.makeText(getApplicationContext(), "Incorrect phone number format (10 digits)",
+                //Checking if length digits is 10
+                if(!(phoneNumber.length() == digitsLength)) {
+                    Toast.makeText(getApplicationContext(), "Incorrect phone number format (10 digits)",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //Checking if phoneNumber is the same as which registered
+                    if(phoneNumber.equals(registeredNumber)) {
+
+                        //SMS function HERE
+                        final SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(phoneNumber,null, message, null, null);
+
+                        buttonFind.setVisibility(View.GONE);
+                        loadingSpinner.setVisibility(View.VISIBLE);
+
+                        Toast.makeText(getApplicationContext(), "SMS sent with success !",
                                 Toast.LENGTH_SHORT).show();
+
                     }
                     else {
-                        //Checking if phoneNumber is the same as which registered
-                        if(phoneNumber.equals(registeredNumber)) {
-
-                            buttonFind.setVisibility(View.GONE);
-                            loadingSpinner.setVisibility(View.VISIBLE);
-
-                            Toast.makeText(getApplicationContext(), "SMS sent with success !",
-                                    Toast.LENGTH_SHORT).show();
-
-                            //SMS function HERE
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(), "Unknown number",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                      Toast.makeText(getApplicationContext(), "Unknown number",
+                           Toast.LENGTH_SHORT).show();
                     }
-
-                } catch (NumberFormatException e){
-
                 }
+
             }
         });
     }
-
-
-
 }
