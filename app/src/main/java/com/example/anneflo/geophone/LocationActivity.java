@@ -92,6 +92,7 @@ public class LocationActivity extends FragmentActivity implements GoogleApiClien
             mMap.addMarker(new MarkerOptions().position(currentLocation).title("You are here !"));
             //Allow move the map
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+            Toast.makeText(this, String.valueOf(currentLocation), Toast.LENGTH_SHORT).show();
 
         }
     }
