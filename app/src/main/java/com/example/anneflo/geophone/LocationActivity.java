@@ -4,6 +4,7 @@ package com.example.anneflo.geophone;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -41,8 +44,8 @@ public class LocationActivity extends FragmentActivity implements GoogleApiClien
                 == PackageManager.PERMISSION_GRANTED) {
 
         } else {
+            //Forcing
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
-
         }
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -70,7 +73,9 @@ public class LocationActivity extends FragmentActivity implements GoogleApiClien
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
     }
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -87,12 +92,23 @@ public class LocationActivity extends FragmentActivity implements GoogleApiClien
             mLatitude = mLastLocation.getLatitude();
             mLongitude = mLastLocation.getLongitude();
 
+            //Getting location
             LatLng currentLocation = new LatLng(mLatitude, mLongitude);
+
+            //Showing coordinates in market snippet
+            String snippetLoc = String.valueOf(currentLocation);
+
+            //Showing device name
+            String deviceName = Build.BRAND + " " + Build.DEVICE;
             //Create a marker for map
-            mMap.addMarker(new MarkerOptions().position(currentLocation).title("You are here !"));
+            mMap.addMarker(new MarkerOptions()
+                    .position(currentLocation)
+                    .title(deviceName)
+                    .snippet(snippetLoc)
+                    .flat(true)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.smalllogo)));
             //Allow move the map
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
-            Toast.makeText(this, String.valueOf(currentLocation), Toast.LENGTH_SHORT).show();
 
         }
     }
