@@ -37,11 +37,10 @@ public class MainActivity extends AppCompatActivity {
         //TEST MAP
         final Button map = (Button) findViewById(R.id.button2);
 
-
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent map = new Intent(MainActivity.this, LocationActivity.class);
+                final Intent map = new Intent(MainActivity.this, LocationActivity.class);
                 startActivity(map);
             }
         });
