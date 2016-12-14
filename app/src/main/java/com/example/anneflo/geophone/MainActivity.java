@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         final ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.progressBar);
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
-        final String registeredNumber = "0631192880";
+        final String registeredNumber = "06631192880";
         final Integer digitsLength = 10;
 
         //TEST MAP
@@ -77,32 +77,48 @@ public class MainActivity extends AppCompatActivity {
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
                 //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
-
-                String phoneNumber = textPhone.getText().toString();
-                String message = "ÇA MARCHE ";
-
-                //Checking if length digits is 10
-
                 try {
 
-                    final SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phoneNumber,null, message, null, null);
-                    Toast.makeText(getApplicationContext(), "SMS sent!",
-                            Toast.LENGTH_LONG).show();
+                    String phoneNumber = textPhone.getText().toString();
+                    String message = "Where are you ?";
 
-                } catch (Exception e){
-                    Toast.makeText(getApplicationContext(), "SMS not sent !",
-                            Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
+                    //Checking if length digits is 10
+                    if (!(phoneNumber.length() == digitsLength)) {
+                        Toast.makeText(getApplicationContext(), "Format de numéro incorrect (10 digits)",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        //Checking if phoneNumber is the same as which registered
+                        if (phoneNumber.equals(registeredNumber)) {
+                            try {
+                                final SmsManager smsManager = SmsManager.getDefault();
+                                smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+                                Toast.makeText(getApplicationContext(), "SMS sent with success !",
+                                        Toast.LENGTH_SHORT).show();
+
+                                //buttonFind.setVisibility(View.GONE);
+                                //loadingSpinner.setVisibility(View.VISIBLE);
+
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), "Error : SMS not sent...",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Unknown number",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } catch (Exception e) {
+
                 }
+            }
 
-            });
 
-        //Recepteur de SMS
+            //Recepteur de SMS
 
-        //SmsReceiver myReceiver = new SmsReceiver();
+            //SmsReceiver myReceiver = new SmsReceiver();
 
-        //this.registerReceiver(myReceiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
-
-        }
-    }}
+            //this.registerReceiver(myReceiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
+        });
+    }
+}
