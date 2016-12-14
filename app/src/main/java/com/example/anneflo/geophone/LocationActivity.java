@@ -1,10 +1,12 @@
 package com.example.anneflo.geophone;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,11 +29,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class LocationActivity extends FragmentActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, OnMapReadyCallback {
+public class LocationActivity extends FragmentActivity implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        OnMapReadyCallback {
+
     private GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Location julienHome;
-    Double mLatitude, mLongitude;
     GoogleMap mMap;
 
     @Override
@@ -50,10 +53,14 @@ public class LocationActivity extends FragmentActivity implements GoogleApiClien
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
         }
 
+        //Google API instance
         buildGoogleApiClient();
+
+        //Connecting to Google API Client
         mGoogleApiClient.connect();
     }
 
+    //Creating Google API
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -62,6 +69,8 @@ public class LocationActivity extends FragmentActivity implements GoogleApiClien
                 .build();
     }
 
+
+    //If app is stopped, disconnect Google API
     @Override
     protected void onStop() {
         super.onStop();
@@ -75,8 +84,13 @@ public class LocationActivity extends FragmentActivity implements GoogleApiClien
     }
 
 
+    //Entering in this after mGoogleAPIClient.connect() function is called
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        Location mLastLocation;
+        Location julienHome;
+        Double mLatitude, mLongitude;
+
         //Checking if ACCESS FINE LOCATION permission is granted
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
         } else {
@@ -92,11 +106,8 @@ public class LocationActivity extends FragmentActivity implements GoogleApiClien
             julienHome.setLatitude(48.97061249999999);
             julienHome.setLongitude(2.287349199999994);
 
-            LatLng julien = new LatLng(julienHome.getLatitude(), julienHome.getLongitude());
-
-
             if(mLastLocation.distanceTo(julienHome) <= 25.00) {
-                Toast.makeText(this, "Téléphone localisé", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Smartphone found", Toast.LENGTH_LONG).show();
 
             } else {
                 //If smartphone is near, ask user if enable compass mode
@@ -148,12 +159,12 @@ public class LocationActivity extends FragmentActivity implements GoogleApiClien
 
     @Override
     public void onConnectionSuspended(int i) {
-        Toast.makeText(this, "Connection suspended", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "Google API : Connection suspended", Toast.LENGTH_SHORT);
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(this, "Connection failed", Toast.LENGTH_SHORT);
+        Toast.makeText(this, "Google API : Connection failed", Toast.LENGTH_SHORT);
     }
 
 }
