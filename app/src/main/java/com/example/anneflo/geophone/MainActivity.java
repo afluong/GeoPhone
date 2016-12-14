@@ -2,6 +2,7 @@ package com.example.anneflo.geophone;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
@@ -78,35 +79,30 @@ public class MainActivity extends AppCompatActivity {
                 //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
 
                 String phoneNumber = textPhone.getText().toString();
-                String message = "ça marche Anne !!!";
+                String message = "ÇA MARCHE ";
 
                 //Checking if length digits is 10
-                if(!(phoneNumber.length() == digitsLength)) {
-                    Toast.makeText(getApplicationContext(), "Incorrect phone number format (10 digits)",
+
+                try {
+
+                    final SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(phoneNumber,null, message, null, null);
+                    Toast.makeText(getApplicationContext(), "SMS sent!",
+                            Toast.LENGTH_LONG).show();
+
+                } catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "SMS not sent !",
                             Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    //Checking if phoneNumber is the same as which registered
-                    if(phoneNumber.equals(registeredNumber)) {
-
-                        //SMS function HERE
-                        final SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage(phoneNumber,null, message, null, null);
-
-                        buttonFind.setVisibility(View.GONE);
-                        loadingSpinner.setVisibility(View.VISIBLE);
-
-                        Toast.makeText(getApplicationContext(), "SMS sent with success !",
-                                Toast.LENGTH_SHORT).show();
-
-                    }
-                    else {
-                      Toast.makeText(getApplicationContext(), "Unknown number",
-                           Toast.LENGTH_SHORT).show();
-                    }
+                    e.printStackTrace();
                 }
 
-            }
-        });
-    }
-}
+            });
+
+        //Recepteur de SMS
+
+        //SmsReceiver myReceiver = new SmsReceiver();
+
+        //this.registerReceiver(myReceiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
+
+        }
+    }}
