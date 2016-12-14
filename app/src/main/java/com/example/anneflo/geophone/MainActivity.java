@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         //TEST MAP
         final Button map = (Button) findViewById(R.id.button2);
 
-
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         //Checking if phoneNumber is the same as which registered
                         if (phoneNumber.equals(registeredNumber)) {
                             try {
+                                //Sending SMS to phone to be found
                                 final SmsManager smsManager = SmsManager.getDefault();
                                 smsManager.sendTextMessage(phoneNumber, null, message, null, null);
                                 Toast.makeText(getApplicationContext(), "SMS sent with success !",
