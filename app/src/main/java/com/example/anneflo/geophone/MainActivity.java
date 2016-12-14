@@ -2,7 +2,7 @@ package com.example.anneflo.geophone;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent map = new Intent(MainActivity.this, LocationActivity.class);
+                final Intent map = new Intent(MainActivity.this, LocationActivity.class);
                 startActivity(map);
             }
         });

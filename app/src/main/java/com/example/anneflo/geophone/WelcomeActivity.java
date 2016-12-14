@@ -1,9 +1,9 @@
 package com.example.anneflo.geophone;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -25,4 +25,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(startMain);
             }
         }, 2000L);
-    }}
+    }
+}
+
