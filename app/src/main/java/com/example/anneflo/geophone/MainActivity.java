@@ -2,9 +2,10 @@ package com.example.anneflo.geophone;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
-import android.support.v7.app.AppCompatActivity;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -32,12 +33,11 @@ public class MainActivity extends AppCompatActivity {
         final ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.progressBar);
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
-        final String registeredNumber = "0123456789";
+        final String registeredNumber = "0667198499";
         final Integer digitsLength = 10;
 
         //TEST MAP
         final Button map = (Button) findViewById(R.id.button2);
-
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,40 +75,50 @@ public class MainActivity extends AppCompatActivity {
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
+                //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
                 try {
 
                     String phoneNumber = textPhone.getText().toString();
+                    String message = "Where are you ?";
 
                     //Checking if length digits is 10
-                    if(!(phoneNumber.length() == digitsLength)) {
-                        Toast.makeText(getApplicationContext(), "Incorrect phone number format (10 digits)",
+                    if (!(phoneNumber.length() == digitsLength)) {
+                        Toast.makeText(getApplicationContext(), "Format de numéro incorrect (10 digits)",
                                 Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         //Checking if phoneNumber is the same as which registered
-                        if(phoneNumber.equals(registeredNumber)) {
+                        if (phoneNumber.equals(registeredNumber)) {
+                            try {
+                                //Sending SMS to phone to be found
+                                final SmsManager smsManager = SmsManager.getDefault();
+                                smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+                                Toast.makeText(getApplicationContext(), "SMS sent with success !",
+                                        Toast.LENGTH_SHORT).show();
 
-                            buttonFind.setVisibility(View.GONE);
-                            loadingSpinner.setVisibility(View.VISIBLE);
+                                //buttonFind.setVisibility(View.GONE);
+                                //loadingSpinner.setVisibility(View.VISIBLE);
 
-                            Toast.makeText(getApplicationContext(), "SMS sent with success !",
-                                    Toast.LENGTH_SHORT).show();
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), "Error : SMS not sent...",
+                                        Toast.LENGTH_SHORT).show();
+                            }
 
-                            //SMS function HERE
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getApplicationContext(), "Unknown number",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
-
-                } catch (NumberFormatException e){
+                } catch (Exception e) {
 
                 }
             }
+
+
+            //Recepteur de SMS
+
+            //SmsReceiver myReceiver = new SmsReceiver();
+
+            //this.registerReceiver(myReceiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
         });
     }
-
-
-
 }
