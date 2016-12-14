@@ -1,11 +1,7 @@
 package com.example.anneflo.geophone;
 
 import android.content.Intent;
-<<<<<<< HEAD
-=======
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
->>>>>>> AnneFlo
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +14,6 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
     }
 
-<<<<<<< HEAD
     protected void onStart(){
         super.onStart();
 
@@ -30,10 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 Intent startMain = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(startMain);
             }
-        }, 5000L);
+        }, 2000L);
     }}
 
-=======
 
-}
->>>>>>> AnneFlo
