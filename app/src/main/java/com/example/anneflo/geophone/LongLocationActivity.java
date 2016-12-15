@@ -1,9 +1,10 @@
 package com.example.anneflo.geophone;
 
+
 import android.os.Build;
-import android.os.Bundle;
 
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,10 +15,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
-public class LocationActivity extends FragmentActivity implements
+public class LongLocationActivity extends FragmentActivity implements
         OnMapReadyCallback {
+
     GoogleMap mMap;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +32,11 @@ public class LocationActivity extends FragmentActivity implements
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
+
+    //If app is stopped, disconnect Google API
     @Override
     protected void onStop() {
         super.onStop();
@@ -50,9 +59,13 @@ public class LocationActivity extends FragmentActivity implements
         mMap.addMarker(new MarkerOptions()
                 .position(currentLocation)
                 .title(deviceName)
-                .snippet("Here some VIBRATE and RING buttons")
+                .snippet("")
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.smalllogo)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
 
     }
+
+
+
+
 }

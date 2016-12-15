@@ -2,4 +2,5 @@
     <string name="app_name">GeoPhone</string>
     <string name="title_activity_maps">GeoPhone</string>
     <string name="title_activity_location">GeoPhone</string>
+    <string name="title_activity_long_location">Map</string>
 </resources>
