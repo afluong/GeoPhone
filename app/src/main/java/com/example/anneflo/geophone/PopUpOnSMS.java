@@ -25,9 +25,16 @@ public class PopUpOnSMS extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("I'm here !");
         builder.setMessage("Please find me !");
-        builder.setPositiveButton("FOUND IT", null);
+
 
         AlertDialog alert = builder.create();
+        alert.setButton(AlertDialog.BUTTON_POSITIVE, "FOUND IT",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent compassLocation = new Intent(PopUpOnSMS.this, MainActivity.class);
+                        startActivity(compassLocation);
+                    }
+                });
         alert.show();
     }
 

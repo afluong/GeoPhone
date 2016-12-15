@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.server.converter.StringToIntConverter;
 import com.google.android.gms.location.LocationServices;
 
 public class MainActivity extends AppCompatActivity implements
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements
         this.requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
+        //Creation Google API Instance
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements
         final ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.progressBar);
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
+        //final String registeredNumber = "0631192880";
         final String registeredNumber = "0667198499";
         final Integer digitsLength = 10;
 
@@ -64,9 +65,6 @@ public class MainActivity extends AppCompatActivity implements
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*final Intent map = new Intent(MainActivity.this, LocationActivity.class);
-                startActivity(map);*/
 
                 mGoogleApiClient.connect();
             }
