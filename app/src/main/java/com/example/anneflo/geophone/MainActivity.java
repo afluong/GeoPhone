@@ -1,8 +1,11 @@
 package com.example.anneflo.geophone;
 
+import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
@@ -77,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
                 //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
                 try {
-
                     String phoneNumber = textPhone.getText().toString();
                     String message = "Where are you ?";
 
@@ -89,11 +91,41 @@ public class MainActivity extends AppCompatActivity {
                         //Checking if phoneNumber is the same as which registered
                         if (phoneNumber.equals(registeredNumber)) {
                             try {
+                                String SENT = "sent";
+                                Intent sentIntent = new Intent(SENT);
+                                //Create Pending Intents
+                                PendingIntent sentPI = PendingIntent.getBroadcast(
+                                        getApplicationContext(), 0, sentIntent,
+                                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+                                registerReceiver(new BroadcastReceiver() {
+                                    @Override
+                                public void onReceive(Context context, Intent intent) {
+                                    switch (getResultCode()) {
+
+                                        case Activity.RESULT_OK:
+                                            Toast.makeText(context, "SMS sent successfully", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
+                                            Toast.makeText(context, "Transmission failed", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case SmsManager.RESULT_ERROR_RADIO_OFF:
+                                            Toast.makeText(context, "Radio off", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case SmsManager.RESULT_ERROR_NULL_PDU:
+                                            Toast.makeText(context, "No PDU defined", Toast.LENGTH_SHORT).show();
+                                            break;
+                                        case SmsManager.RESULT_ERROR_NO_SERVICE:
+                                            Toast.makeText(context,"No service", Toast.LENGTH_SHORT).show();
+                                            break;
+                                    }
+                                }
+
+                            }, new IntentFilter(SENT));
+
                                 //Sending SMS to phone to be found
                                 final SmsManager smsManager = SmsManager.getDefault();
-                                smsManager.sendTextMessage(phoneNumber, null, message, null, null);
-                                Toast.makeText(getApplicationContext(), "SMS sent with success !",
-                                        Toast.LENGTH_SHORT).show();
+                                smsManager.sendTextMessage(phoneNumber, null, message, sentPI, null);
 
                                 //buttonFind.setVisibility(View.GONE);
                                 //loadingSpinner.setVisibility(View.VISIBLE);
@@ -104,21 +136,16 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "Unknown number",
-                                    Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Unknown Number",
+                                        Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 } catch (Exception e) {
 
                 }
             }
 
-
-            //Recepteur de SMS
-
-            //SmsReceiver myReceiver = new SmsReceiver();
-
-            //this.registerReceiver(myReceiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
         });
     }
 }
