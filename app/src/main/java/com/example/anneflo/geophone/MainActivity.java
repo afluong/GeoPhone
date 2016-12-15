@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements
         final ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.progressBar);
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
-        //final String registeredNumber = "0631192880";
-        final String registeredNumber = "0667198499";
+        final String registeredNumber = "0631192880";
+        //final String registeredNumber = "0667198499";
         final Integer digitsLength = 10;
 
         //TEST MAP

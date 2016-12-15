@@ -52,7 +52,6 @@ public class SmsReceiver extends BroadcastReceiver
                             String longitude = String.valueOf(mRemoteLocation.getLongitude());
                             String message = "lat : " + latitude + ";\n lng : " + longitude;
 
-
                             final SmsManager smsManager = android.telephony.SmsManager.getDefault();
                             smsManager.sendTextMessage(phoneNumber, null, message, null, null);
 
@@ -60,11 +59,12 @@ public class SmsReceiver extends BroadcastReceiver
                             Location gpsLocation = appLocationService.getLocation(LocationManager.GPS_PROVIDER);
 
                             if (gpsLocation != null) {
-                                double latitude = gpsLocation.getLatitude();
-                                double longitude = gpsLocation.getLongitude();
-                                Toast.makeText(contexts, "Mobile Location (GPS): \nLatitude: " + latitude
-                                                + "\nLongitude: " + longitude,
-                                        Toast.LENGTH_LONG).show();
+                                String latitude = String.valueOf(mRemoteLocation.getLatitude());
+                                String longitude = String.valueOf(mRemoteLocation.getLongitude());
+                                String message = "lat : " + latitude + ";\n lng : " + longitude;
+
+                                final SmsManager smsManager = android.telephony.SmsManager.getDefault();
+                                smsManager.sendTextMessage(phoneNumber, null, message, null, null);
                             }
 
                         }
