@@ -1,10 +1,13 @@
 package com.example.anneflo.geophone;
 
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,6 +17,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class LongLocationActivity extends FragmentActivity implements
         OnMapReadyCallback {
@@ -46,20 +53,40 @@ public class LongLocationActivity extends FragmentActivity implements
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        //mMap.setMyLocationEnabled(true);
+
         Double mLatitude = Double.parseDouble(getIntent().getStringExtra("LAT"));
         Double mLongitude = Double.parseDouble(getIntent().getStringExtra("LNG"));
+        String deviceName = getIntent().getStringExtra("DEVICE");
+
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(this, Locale.getDefault());
+        String address = "",
+                city = "",
+                postalCode = "";
+
+        try {
+            addresses = geocoder.getFromLocation(mLatitude, mLongitude, 1);
+            address = addresses.get(0).getAddressLine(0);
+            city = addresses.get(0).getLocality();
+            postalCode = addresses.get(0).getPostalCode();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //Getting location for marker
         LatLng currentLocation = new LatLng(mLatitude, mLongitude);
 
-        //Showing device name
-        String deviceName = Build.BRAND + " " + Build.DEVICE;
+        //Showing address where the phone is
+        String completeAddress = address + "\n" + postalCode + " " + city;
 
         //Create a marker for map
         mMap.addMarker(new MarkerOptions()
                 .position(currentLocation)
                 .title(deviceName)
-                .snippet("")
+                .snippet(completeAddress)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.smalllogo)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
 

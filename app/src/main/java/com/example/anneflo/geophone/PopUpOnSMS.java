@@ -25,6 +25,7 @@ public class PopUpOnSMS extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("I'm here !");
         builder.setMessage("Please find me !");
+        builder.setCancelable(false);
 
 
         AlertDialog alert = builder.create();

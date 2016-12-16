@@ -21,19 +21,53 @@
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:id="@+id/imageView5"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="35dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:text="Compass mode"
+    <ImageView
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        app:srcCompat="@drawable/signal0"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:id="@+id/imageView8"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/imageView5"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#E0F2F1"
-        android:textSize="40dp"
+        app:srcCompat="?android:attr/homeAsUpIndicator"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="RING"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
         android:fontFamily="sans-serif-thin"
-        android:id="@+id/textView"
-        android:layout_below="@+id/imageView5"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="61dp" />
+        android:background="#009688"
+        android:textSize="20dp"
+        android:textColor="#E0F2F1"
+        android:id="@+id/button1"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="VIBRATE"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:fontFamily="sans-serif-thin"
+        android:background="#009688"
+        android:textSize="20dp"
+        android:textColor="#E0F2F1"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>
