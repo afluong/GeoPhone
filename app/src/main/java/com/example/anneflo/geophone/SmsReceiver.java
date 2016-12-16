@@ -24,8 +24,8 @@ public class SmsReceiver extends BroadcastReceiver
         String locateMessage = "Where are you ?";
         String vibrateMessage = "VIBRATE";
         String ringMessage = "RING";
-        //String allowedNumber = "+33667198499";
-        String allowedNumber = "+33631192880";
+        String allowedNumber = "+33667198499";
+        //String allowedNumber = "+33631192880";
         contexts = context;
         AppLocationService appLocationService;
         appLocationService = new AppLocationService(contexts);
@@ -76,9 +76,9 @@ public class SmsReceiver extends BroadcastReceiver
                         }
 
                         //Display "i'm here" alert
-                        Intent popUp = new Intent(context, PopUpOnSMS.class);
+                        /*Intent popUp = new Intent(context, PopUpOnSMS.class);
                         popUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(popUp);
+                        context.startActivity(popUp);*/
 
                     } else if (phoneNumber.equals(allowedNumber) && currentMessage.equals(vibrateMessage)) {
                         final Vibrator mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);

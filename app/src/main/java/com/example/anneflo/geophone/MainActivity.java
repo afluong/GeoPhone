@@ -2,21 +2,23 @@ package com.example.anneflo.geophone;
 
 import android.app.Activity;
 
+
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
     String mLatitude, mLongitude, mRemoteLat, mRemoteLng, mRemoteDevice, phoneNumber;
-    LocationManager mLocationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,19 +138,19 @@ public class MainActivity extends AppCompatActivity implements
                                     switch (getResultCode()) {
 
                                         case Activity.RESULT_OK:
-                                            Toast.makeText(context, "SMS sent successfully", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
                                             break;
                                         case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                                            Toast.makeText(context, "Transmission failed", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, "Transmission Failed", Toast.LENGTH_SHORT).show();
                                             break;
                                         case SmsManager.RESULT_ERROR_RADIO_OFF:
-                                            Toast.makeText(context, "Radio off", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, "Radio Off", Toast.LENGTH_SHORT).show();
                                             break;
                                         case SmsManager.RESULT_ERROR_NULL_PDU:
-                                            Toast.makeText(context, "No PDU defined", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, "No PDU Defined", Toast.LENGTH_SHORT).show();
                                             break;
                                         case SmsManager.RESULT_ERROR_NO_SERVICE:
-                                            Toast.makeText(context,"No service", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context,"Service Unavailable", Toast.LENGTH_SHORT).show();
                                             break;
                                     }
                                 }
@@ -158,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements
 
                                 //Sending SMS to phone to be found
                                 final SmsManager smsManager = SmsManager.getDefault();
+
                                 smsManager.sendTextMessage(phoneNumber, null, message, sentPI, null);
 
 
@@ -181,8 +183,8 @@ public class MainActivity extends AppCompatActivity implements
                                                     SmsMessage currentSMS = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                                                     String currentMessage = currentSMS.getDisplayMessageBody();
                                                     String phoneNumber = currentSMS.getDisplayOriginatingAddress();
-                                                    //String allowedNumber = "+33631192880";
-                                                    String allowedNumber = "+33667198499";
+                                                    String allowedNumber = "+33631192880";
+                                                    //String allowedNumber = "+33667198499";
 
                                                     if(phoneNumber.equals(allowedNumber)) {
                                                         if (currentMessage.contains("lat")) {
@@ -241,16 +243,16 @@ public class MainActivity extends AppCompatActivity implements
                         } else {
                             Toast.makeText(getApplicationContext(), "Unknown Number",
                                         Toast.LENGTH_SHORT).show();
-
                         }
-
                     }
+
                 } catch (Exception e) {
 
                 }
             }
         });
     }
+
 
     //Entering in this after mGoogleAPIClient.connect() function is called
     @Override
@@ -324,13 +326,13 @@ public class MainActivity extends AppCompatActivity implements
             Toast.makeText(this, "Google API : Can't find current location, please make sure that Google API services are up",
                     Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
     public void onConnectionSuspended(int i) {
 
     }
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
