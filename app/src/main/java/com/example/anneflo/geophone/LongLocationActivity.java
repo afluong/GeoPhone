@@ -53,7 +53,7 @@ public class LongLocationActivity extends FragmentActivity implements
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        //mMap.setMyLocationEnabled(true);
+        mMap.setMyLocationEnabled(true);
 
         Double mLatitude = Double.parseDouble(getIntent().getStringExtra("LAT"));
         Double mLongitude = Double.parseDouble(getIntent().getStringExtra("LNG"));

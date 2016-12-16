@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -34,9 +36,11 @@ import java.util.StringTokenizer;
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
+
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
-    String mRemoteLat, mRemoteLng, mRemoteDevice, phoneNumber;
+    String mLatitude, mLongitude, mRemoteLat, mRemoteLng, mRemoteDevice, phoneNumber;
+    LocationManager mLocationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements
 
         findButton.setVisibility(View.VISIBLE);
         loadingSpinner.setVisibility(View.GONE);
+
     }
 
     protected void onStart() {
@@ -72,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements
         final ProgressBar loadingSpinner = (ProgressBar) findViewById(R.id.progressBar);
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
-        //final String registeredNumber = "0631192880";
-        final String registeredNumber = "0667198499";
+        final String registeredNumber = "0631192880";
+        //final String registeredNumber = "0667198499";
         final Integer digitsLength = 10;
 
         //Listening on About icon
@@ -105,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
                 //ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
+
                 try {
                     phoneNumber = textPhone.getText().toString();
                     String message = "Where are you ?";
@@ -127,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements
                                 /*Toast.makeText(getApplicationContext(), "SMS sent with success !",
                                         Toast.LENGTH_SHORT).show();*/
 
+                                //Listening on received GPS data from remote phone
                                 BroadcastReceiver getGPSReceiver = new BroadcastReceiver() {
                                     @Override
                                     public void onReceive(Context context, Intent intent) {
@@ -140,38 +147,48 @@ public class MainActivity extends AppCompatActivity implements
                                                     SmsMessage currentSMS = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                                                     String currentMessage = currentSMS.getDisplayMessageBody();
                                                     String phoneNumber = currentSMS.getDisplayOriginatingAddress();
+                                                    //String allowedNumber = "+33631192880";
+                                                    String allowedNumber = "+33667198499";
 
-                                                    if(currentMessage.contains("lat") && phoneNumber.equals("+33667198499")) {
-                                                        StringTokenizer tokenizer = new StringTokenizer(currentMessage, "\n");
-                                                        int numberOfTokens = tokenizer.countTokens();
-                                                        String[] splitArr = new String[numberOfTokens];
-                                                        splitArr[0] = tokenizer.nextToken();
-                                                        splitArr[1] = tokenizer.nextToken();
-                                                        splitArr[2] = tokenizer.nextToken();
+                                                    if(phoneNumber.equals(allowedNumber)) {
+                                                        if (currentMessage.contains("lat")) {
+                                                            StringTokenizer tokenizer = new StringTokenizer(currentMessage, "\n");
+                                                            int numberOfTokens = tokenizer.countTokens();
+                                                            String[] splitArr = new String[numberOfTokens];
+                                                            splitArr[0] = tokenizer.nextToken();
+                                                            splitArr[1] = tokenizer.nextToken();
+                                                            splitArr[2] = tokenizer.nextToken();
 
-                                                        String mLat = splitArr[0];
-                                                        String mLng = splitArr[1];
-                                                        String mDevice = splitArr[2];
+                                                            String mLat = splitArr[0];
+                                                            String mLng = splitArr[1];
+                                                            String mDevice = splitArr[2];
 
-                                                        mRemoteLat = mLat.substring(5, mLat.length());
-                                                        mRemoteLng = mLng.substring(5, mLng.length());
-                                                        mRemoteDevice = mDevice.substring(8, mDevice.length());
+                                                            mRemoteLat = mLat.substring(5, mLat.length());
+                                                            mRemoteLng = mLng.substring(5, mLng.length());
+                                                            mRemoteDevice = mDevice.substring(8, mDevice.length());
 
-                                                        mGoogleApiClient.connect();
+                                                            //If GPS Provider or Network Service is disabled, trying to use Google API instance
+                                                            mGoogleApiClient.connect();
+
+                                                        } else if (currentMessage.contains("ERROR")) {
+                                                            Toast.makeText(getApplicationContext(),
+                                                                    "ERROR: Can't find remote phone",
+                                                                    Toast.LENGTH_SHORT).show();
+                                                        }
                                                     }
                                                 }
                                                 break;
 
                                             case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                                                Toast.makeText(context, "Test Generic failure", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Generic Failure", Toast.LENGTH_SHORT).show();
                                                 break;
 
                                             case SmsManager.RESULT_ERROR_NULL_PDU:
-                                                Toast.makeText(context, "Test Null PDU", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "PDU Null", Toast.LENGTH_SHORT).show();
                                                 break;
 
                                             case SmsManager.RESULT_ERROR_NO_SERVICE:
-                                                Toast.makeText(context, "Test no service", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Service Unavailable", Toast.LENGTH_SHORT).show();
                                                 break;
                                         }
 
@@ -182,14 +199,13 @@ public class MainActivity extends AppCompatActivity implements
                                 filter.addAction("android.provider.Telephony.SMS_RECEIVED");
                                 registerReceiver(getGPSReceiver, filter);
 
-
                             } catch (Exception e) {
-                                Toast.makeText(getApplicationContext(), "Error : SMS not sent...",
+                                Toast.makeText(getApplicationContext(), "ERROR: SMS not sent...",
                                         Toast.LENGTH_SHORT).show();
                             }
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "Unknown number",
+                            Toast.makeText(getApplicationContext(), "Unknown Number",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -221,21 +237,22 @@ public class MainActivity extends AppCompatActivity implements
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
 
+        //Toast.makeText(this, String.valueOf(mLastLocation.distanceTo(mRemoteLocation)), Toast.LENGTH_SHORT).show();
+
         if(mLastLocation != null) {
 
-            final String mLatitude = String.valueOf(mLastLocation.getLatitude());
-            final String mLongitude = String.valueOf(mLastLocation.getLongitude());
+            mLatitude = String.valueOf(mRemoteLocation.getLatitude());
+            mLongitude = String.valueOf(mRemoteLocation.getLongitude());
 
             //Checking if phone is more far than 15m
             if (mLastLocation.distanceTo(mRemoteLocation) > 15) {
-
                 final Intent longMapLocation = new Intent(MainActivity.this, LongLocationActivity.class);
                 longMapLocation.putExtra("LAT", mLatitude);
                 longMapLocation.putExtra("LNG", mLongitude);
                 longMapLocation.putExtra("DEVICE", mRemoteDevice);
                 startActivity(longMapLocation);
 
-                //if not, display alertdialog
+              //if not, display alertdialog
             } else {
                 //Creating alertdialog to ask user if want to use compass or just display map
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();

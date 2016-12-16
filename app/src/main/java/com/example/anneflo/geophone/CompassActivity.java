@@ -40,7 +40,7 @@ public class CompassActivity extends AppCompatActivity {
             }
         });
 
-
+        //Vibrating remote phone by sending "VIBRATE" SMS
         vibrateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +52,7 @@ public class CompassActivity extends AppCompatActivity {
             }
         });
 
+        //Ringing remote phone by sending "RING" SMS
         ringButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

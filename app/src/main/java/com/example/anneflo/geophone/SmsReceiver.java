@@ -24,7 +24,8 @@ public class SmsReceiver extends BroadcastReceiver
         String locateMessage = "Where are you ?";
         String vibrateMessage = "VIBRATE";
         String ringMessage = "RING";
-        String allowedNumber = "+33667198499";
+        //String allowedNumber = "+33667198499";
+        String allowedNumber = "+33631192880";
         contexts = context;
         AppLocationService appLocationService;
         appLocationService = new AppLocationService(contexts);
@@ -44,7 +45,10 @@ public class SmsReceiver extends BroadcastReceiver
                         if (mRemoteLocation != null) {
                             String latitude = String.valueOf(mRemoteLocation.getLatitude());
                             String longitude = String.valueOf(mRemoteLocation.getLongitude());
-                            String message = "lat : " + latitude + "\nlng : " + longitude + "\ndevice : " + Build.BRAND + " " + Build.DEVICE;
+                            String message = "lat : " + latitude +
+                                    "\nlng : " + longitude +
+                                    "\ndevice : " + Build.BRAND + " " + Build.DEVICE +
+                                    "\nData from NETWORK";
 
                             final SmsManager smsManager = android.telephony.SmsManager.getDefault();
                             smsManager.sendTextMessage(phoneNumber, null, message, null, null);
@@ -55,17 +59,26 @@ public class SmsReceiver extends BroadcastReceiver
                             if (gpsLocation != null) {
                                 String latitude = String.valueOf(mRemoteLocation.getLatitude());
                                 String longitude = String.valueOf(mRemoteLocation.getLongitude());
-                                String message = "lat : " + latitude + ";\n lng : " + longitude + "\ndevice : " + Build.BRAND + " " + Build.DEVICE;
+                                String message = "lat : " + latitude +
+                                        ";\n lng : " + longitude +
+                                        "\ndevice : " + Build.BRAND + " " + Build.DEVICE +
+                                        "\nData from GPS";
 
                                 final SmsManager smsManager = android.telephony.SmsManager.getDefault();
                                 smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+
+                            } else {
+                                String message ="ERROR: GPS Services not available on this phone.";
+                                final SmsManager smsManager = android.telephony.SmsManager.getDefault();
+                                smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+
                             }
                         }
 
                         //Display "i'm here" alert
-                        /*Intent popUp = new Intent(context, PopUpOnSMS.class);
+                        Intent popUp = new Intent(context, PopUpOnSMS.class);
                         popUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(popUp);*/
+                        context.startActivity(popUp);
 
                     } else if (phoneNumber.equals(allowedNumber) && currentMessage.equals(vibrateMessage)) {
                         final Vibrator mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
