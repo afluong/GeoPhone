@@ -54,8 +54,14 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".PopUpOnSMS"></activity>
-        <activity android:name=".CompassActivity"></activity>
+        <activity android:name=".PopUpOnSMS" />
+        <activity android:name=".CompassActivity" />
+        <activity
+            android:name=".LongLocationActivity"
+            android:label="@string/title_activity_long_location"></activity>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

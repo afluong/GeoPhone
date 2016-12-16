@@ -22,20 +22,20 @@ public class AboutActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         
-        final ImageView backPrevious = (ImageView) findViewById(R.id.imageView4);
+        final ImageView arrowPrevious = (ImageView) findViewById(R.id.imageView4);
         final ImageView devAnneFlo = (ImageView) findViewById(R.id.annefloView);
         final ImageView devJulien = (ImageView) findViewById(R.id.julienView);
 
         //Defining back arrow can be clicked
-        backPrevious.setClickable(true);
+        arrowPrevious.setClickable(true);
 
         //Listening on back Arrow imageView
-        backPrevious.setOnClickListener(new View.OnClickListener() {
+        arrowPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Sending to MainActivity
-                Intent mainIntent = new Intent(AboutActivity.this, MainActivity.class);
-                startActivity(mainIntent);
+                Intent mainActivity = new Intent(AboutActivity.this, MainActivity.class);
+                startActivity(mainActivity);
 
                 //Slide right to left effect
                 overridePendingTransition(R.anim.left_slide, R.anim.right_slide);
