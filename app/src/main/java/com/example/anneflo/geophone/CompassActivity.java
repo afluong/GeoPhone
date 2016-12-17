@@ -1,10 +1,15 @@
 package com.example.anneflo.geophone;
 
 import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+
 import android.telephony.SmsManager;
+
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -36,7 +41,7 @@ public class CompassActivity extends AppCompatActivity {
                 startActivity(mainActivity);
 
                 //Slide right to left effect
-                overridePendingTransition(R.anim.left_slide, R.anim.right_slide);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
             }
         });
 

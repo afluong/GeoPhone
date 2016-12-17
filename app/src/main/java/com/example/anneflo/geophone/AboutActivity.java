@@ -1,7 +1,6 @@
 package com.example.anneflo.geophone;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +37,7 @@ public class AboutActivity extends AppCompatActivity {
                 startActivity(mainActivity);
 
                 //Slide right to left effect
-                overridePendingTransition(R.anim.left_slide, R.anim.right_slide);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
 
