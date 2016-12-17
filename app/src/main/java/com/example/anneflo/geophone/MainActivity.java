@@ -84,10 +84,8 @@ public class MainActivity extends AppCompatActivity implements
         loadingSpinner.setVisibility(View.GONE);
         final ImageView about = (ImageView) findViewById(R.id.imageView3);
 
-        //HERE only registered numbers which can be found
-        //final String registeredNumber = "0631192880";
+        //-------------------------HERE ONLY REGISTERED PHONE NUMBER WHICH CAN FOUND-------------------------
         final String registeredNumber = "0667198499";
-        //final String registeredNumber = "0676412797";
         final Integer digitsLength = 10;
 
         //Listening on About icon
@@ -229,10 +227,8 @@ public class MainActivity extends AppCompatActivity implements
                                                     String currentMessage = currentSMS.getDisplayMessageBody();
                                                     String phoneNumber = currentSMS.getDisplayOriginatingAddress();
 
-                                                    //HERE allowed phone numbers which send their location
-                                                    //String allowedNumber = "+33631192880";
+                                                    //-------------------------HERE ALLOWED PHONE NUMBER THAT SENDS IT LOCATION-------------------------
                                                     String allowedNumber = "+33667198499";
-                                                    //String allowedNumber = "+33676412797";
 
                                                     //Only listening to authorized numbers
                                                     if(phoneNumber.equals(allowedNumber)) {

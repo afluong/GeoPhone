@@ -30,10 +30,9 @@ public class SmsReceiver extends BroadcastReceiver
         String vibrateMessage = "VIBRATE";
         String ringMessage = "RING";
 
-        //HERE allowing phone number of phone that requests location
+        //-------------------------HERE ALLOWING PHONE NUMBER THAT REQUESTS LOCATION-------------------------
         String allowedNumber = "+33667198499";
-        //String allowedNumber = "+33631192880";
-        //String allowedNumber = "+33676412797";
+
         contexts = context;
         AppLocationService appLocationService;
         appLocationService = new AppLocationService(contexts);
@@ -87,9 +86,9 @@ public class SmsReceiver extends BroadcastReceiver
                             }
 
                         //Display "i'm here" pop up on screen of remote phone
-                        /*Intent popUp = new Intent(context, PopUpOnSMS.class);
+                        Intent popUp = new Intent(context, PopUpOnSMS.class);
                         popUp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(popUp);*/
+                        context.startActivity(popUp);
 
                         //If SMS contains Vibrate message, enabling vibrate function
                         } else if (currentMessage.equals(vibrateMessage)) {

@@ -29,6 +29,8 @@ public class CompassActivity extends AppCompatActivity {
         final Button ringButton = (Button) findViewById(R.id.button1);
         final ImageView arrowPrevious = (ImageView) findViewById(R.id.imageView);
 
+        ringButton.getBackground().setAlpha(64);
+
         //Defining back arrow can be clicked
         arrowPrevious.setClickable(true);
 
@@ -41,7 +43,7 @@ public class CompassActivity extends AppCompatActivity {
                 startActivity(mainActivity);
 
                 //Slide right to left effect
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_in_right);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
         });
 
